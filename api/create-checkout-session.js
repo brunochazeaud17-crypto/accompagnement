@@ -7,26 +7,26 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { priceId } = req.body;
+    // On récupère le priceId ET l'email du client
+    const { priceId, customerEmail } = req.body;
 
-    if (!priceId) {
-      return res.status(400).json({ error: 'Price ID manquant.' });
+    if (!priceId || !customerEmail) {
+      return res.status(400).json({ error: 'ID de tarif ou e-mail manquant.' });
     }
 
-    // Récupérer les détails du tarif pour savoir si c'est un abonnement ou un paiement unique
     const price = await stripe.prices.retrieve(priceId);
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
-      mode: price.type === 'recurring' ? 'subscription' : 'payment', // 'subscription' pour les paiements récurrents
+      mode: price.type === 'recurring' ? 'subscription' : 'payment',
       line_items: [{
         price: priceId,
         quantity: 1,
       }],
-      // Active les codes promo sur la page de paiement
+      // On pré-remplit l'email du client sur la page de paiement Stripe
+      customer_email: customerEmail,
       allow_promotion_codes: true,
-      // URLs de redirection après le paiement
-      success_url: `${req.headers.origin}/succes.html`, // Créez une page de succès
+      success_url: `${req.headers.origin}/succes.html`,
       cancel_url: `${req.headers.origin}/`,
     });
 

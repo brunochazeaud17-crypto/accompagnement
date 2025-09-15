@@ -1,0 +1,10 @@
+# Fichier de configuration pour Netlify
+
+[build]
+  # Ce dossier contient vos fonctions serverless.
+  # C'est la ligne la plus importante, elle force Netlify à regarder dans le dossier "api".
+  functions = "api"
+
+  # Ce dossier contient les fichiers de votre site à publier.
+  # Le "." signifie la racine du projet, là où se trouve votre index.html.
+  publish = "."

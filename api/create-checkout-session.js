@@ -1,17 +1,23 @@
-// /api/create-checkout-session.js
+// /api/create-checkout-session.js (VERSION CORRIGÉE)
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).end('Method Not Allowed');
+exports.handler = async (event, context) => {
+  // On s'assure que la requête est bien de type POST
+  if (event.httpMethod !== 'POST') {
+    return {
+      statusCode: 405,
+      body: 'Method Not Allowed',
+    };
   }
 
   try {
-    // On récupère le priceId ET l'email du client
-    const { priceId, customerEmail } = req.body;
+    const { priceId, customerEmail } = JSON.parse(event.body);
 
     if (!priceId || !customerEmail) {
-      return res.status(400).json({ error: 'ID de tarif ou e-mail manquant.' });
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: 'ID de tarif ou e-mail manquant.' }),
+      };
     }
 
     const price = await stripe.prices.retrieve(priceId);
@@ -23,16 +29,24 @@ export default async function handler(req, res) {
         price: priceId,
         quantity: 1,
       }],
-      // On pré-remplit l'email du client sur la page de paiement Stripe
       customer_email: customerEmail,
       allow_promotion_codes: true,
-      success_url: `${req.headers.origin}/succes.html`,
-      cancel_url: `${req.headers.origin}/`,
+      success_url: `${process.env.URL}/succes.html`, // Netlify fournit la variable URL
+      cancel_url: `${process.env.URL}/`,
     });
 
-    res.status(200).json({ sessionId: session.id });
+    // C'est ici la syntaxe corrigée pour une réponse réussie
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ sessionId: session.id }),
+    };
+
   } catch (err) {
     console.error('Erreur lors de la création de la session Stripe:', err);
-    res.status(500).json({ error: 'Erreur interne du serveur.' });
+    // C'est ici la syntaxe corrigée pour une réponse d'erreur
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Erreur interne du serveur.' }),
+    };
   }
-}
+};

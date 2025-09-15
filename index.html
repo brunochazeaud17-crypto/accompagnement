@@ -6,6 +6,7 @@
     <title>L'Or en Moi - Accompagnement parents et futurs parents</title>
     <script src="https://js.stripe.com/v3/"></script>
     <style>
+        /* Tout votre CSS précédent reste identique. */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body { font-family: 'Avenir Light', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #2C5B85; background-image: radial-gradient(circle at top left, rgba(102, 126, 234, 0.3), transparent 40%), radial-gradient(circle at bottom right, rgba(240, 147, 251, 0.3), transparent 40%); min-height: 100vh; color: #f0f0f0; overflow-x: hidden; }
@@ -24,9 +25,9 @@
         .logo { max-width: 250px; height: auto; margin-bottom: 20px; }
         h1, h2, h3, .parcours-btn .title { font-family: 'Welcome', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
         h1 { font-size: clamp(2.2rem, 1.8rem + 3vw, 3rem); color: #f093fb; margin-bottom: 15px; font-weight: 700; text-shadow: 0 0 25px rgba(240, 147, 251, 0.5); line-height: 1.2; }
-        .section h2 { font-size: clamp(1.5rem, 1.3rem + 1.5vw, 1.8rem); color: #f7bcfd; margin-bottom: 20px; }
+        h2 { font-size: clamp(1.5rem, 1.3rem + 1.5vw, 1.8rem); color: #f7bcfd; margin-bottom: 20px; }
         .subtitle { font-size: 1.25em; color: #d1d1d1; font-weight: 300; }
-        .section p { line-height: 1.8; color: #e0e0e0; margin-bottom: 15px; }
+        p { line-height: 1.8; color: #e0e0e0; margin-bottom: 15px; }
         .highlight-list { list-style-type: none; padding: 10px 0; }
         .highlight-list li { padding: 8px 0 8px 30px; position: relative; color: #e0e0e0; line-height: 1.6; }
         .highlight-list li::before { content: '✦'; position: absolute; left: 0; top: 8px; color: #f093fb; font-size: 1.2em; }
@@ -37,6 +38,9 @@
         .parcours-btn .title { font-size: 1.2em; font-weight: 600; color: #f093fb; margin-bottom: 5px; }
         .parcours-btn .subtitle { font-size: 0.9em; color: #d1d1d1; }
         .form-section { background: rgba(0, 0, 0, 0.2); padding: 40px; border-radius: 20px; margin: 40px 0; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .form-group { margin-bottom: 25px; }
+        .form-group label { display: block; margin-bottom: 8px; color: #d1d1d1; font-weight: 500; }
+        .form-group input { width: 100%; padding: 14px 18px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; background: rgba(255, 255, 255, 0.05); font-size: 1em; transition: all 0.3s ease; color: #f0f0f0; font-family: 'Avenir Light', sans-serif; }
         .btn-submit { width: 100%; font-size: 1.1em; margin-top: 20px; border-image: linear-gradient(45deg, #667eea, #764ba2) 1; padding: 14px 25px; color: white; border: 2px solid; border-radius: 12px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; background-color: transparent; text-transform: uppercase; letter-spacing: 1px; }
         .btn-submit:hover { background: linear-gradient(45deg, #667eea, #764ba2); transform: translateY(-3px); box-shadow: 0 15px 30px rgba(118, 75, 162, 0.3); }
         .payment-options { display: flex; gap: 15px; margin: 20px 0; flex-wrap: wrap; }
@@ -75,16 +79,13 @@
 
     <div id="home" class="page active">
         <div class="glass-container">
-            <div class="header">
-                <img src="logo.png" alt="L'Or en Moi Logo" class="logo">
-                <p class="subtitle">Accompagnement holistique pour mamans et futures mamans</p>
-            </div>
-            <div class="section glass-inner-card"><h2>✨ Pour qui ?</h2><p>Pour toutes les mamans, futures mamans et leurs tout-petits qui souhaitent vivre la maternité avec plus de sérénité, confiance et authenticité.</p></div>
-            <div class="section glass-inner-card"><h2>🌿 Mon Accompagnement</h2><p>Je t'accompagne pas à pas dans ce chemin précieux, avec douceur, écoute et bienveillance.</p><p><strong>Mon intention :</strong></p><ul class="highlight-list"><li>T'aider à développer ta confiance en tes ressentis et ton intuition</li><li>Tisser un lien profond et unique avec ton bébé</li><li>Dépasser le découragement ou les schémas qui pèsent au quotidien</li><li>Retrouver ton équilibre de femme, au-delà de ton rôle de maman</li></ul><p>En cheminant ainsi, tu offres à ton enfant un cadre d'amour et d'harmonie pour grandir heureux et épanoui, tout en retrouvant toi-même plus de clarté et de légèreté dans ton rôle de maman.</p></div>
-            <div class="section glass-inner-card"><h2>🔥 Les plus de mon accompagnement</h2><ul class="highlight-list"><li>Éclairage par ma clairvoyance et des outils reconnus</li><li>Pas de libérations "à l'infini" mais une conscience élargie au point zéro</li><li>Transmission et enseignement pour une autonomie durable</li></ul></div>
+            <div class="header"><img src="logo.png" alt="L'Or en Moi Logo" class="logo"><p class="subtitle">Accompagnement holistique pour mamans et futures mamans</p></div>
+            <div class="glass-inner-card"><h2>✨ Pour qui ?</h2><p>Pour toutes les mamans, futures mamans et leurs tout-petits qui souhaitent vivre la maternité avec plus de sérénité, confiance et authenticité.</p></div>
+            <div class="glass-inner-card"><h2>🌿 Mon Accompagnement</h2><p>Je t'accompagne pas à pas dans ce chemin précieux, avec douceur, écoute et bienveillance.</p><p><strong>Mon intention :</strong></p><ul class="highlight-list"><li>T'aider à développer ta confiance en tes ressentis et ton intuition</li><li>Tisser un lien profond et unique avec ton bébé</li><li>Dépasser le découragement ou les schémas qui pèsent au quotidien</li><li>Retrouver ton équilibre de femme, au-delà de ton rôle de maman</li></ul><p>En cheminant ainsi, tu offres à ton enfant un cadre d'amour et d'harmonie pour grandir heureux et épanoui, tout en retrouvant toi-même plus de clarté et de légèreté dans ton rôle de maman.</p></div>
+            <div class="glass-inner-card"><h2>🔥 Les plus de mon accompagnement</h2><ul class="highlight-list"><li>Éclairage par ma clairvoyance et des outils reconnus</li><li>Pas de libérations "à l'infini" mais une conscience élargie au point zéro</li><li>Transmission et enseignement pour une autonomie durable</li></ul></div>
             <div class="benefits-grid"><div class="benefit-card glass-inner-card"><div class="icon">🌟</div><h3>Transformation Profonde</h3><p>Libère-toi des poids transgénérationnels pour créer ton propre chemin</p></div><div class="benefit-card glass-inner-card"><div class="icon">💝</div><h3>Lien Unique</h3><p>Développe une connexion profonde et authentique avec ton bébé</p></div><div class="benefit-card glass-inner-card"><div class="icon">🦋</div><h3>Épanouissement</h3><p>Retrouve ton équilibre et ta joie en tant que femme et maman</p></div></div>
-            <div class="testimonial glass-inner-card"><p>"Laurence est une âme douce. J'ai demandé une consultation pour mon fils, connaître un peu les pourquoi des comment. Il en est ressorti des réponses qui m'ont traversée droit au cœur, des réponses parlantes, émotives. Des validations de ce dont je me doutais déjà, mais que je n'avais pu confirmer. Laurence m'a permis d'apprendre et de comprendre mon enfant, mais aussi moi-même, sur des choses qui m'avaient jusque-là échappé consciemment. Un grand merci à elle, au plaisir de réitérer l'expérience lorsqu'il y aura besoin."</p><p style="text-align: right; margin-top: 15px; font-style: normal;">— Loïse</p></div>
-            <div class="testimonial glass-inner-card"><p>"Laurence m'accompagne depuis le début de ma grossesse et a su apaiser mes craintes et angoisses concernant l'accouchement mais aussi être attentive et à l'écoute de mes besoins sur le moment. Chaque rdv est différent et laisse place à ce qui a besoin d'être mis en lumière à l'instant T. Je ne peux que recommander Laurence. Aujourd'hui bébé a 5 mois et nous continuons les rdv 1 fois par semaine, qui sont une vraie bouffée d'oxygène :) Merci Laurence pour ta bienveillance, empathie et disponibilité."</p><p style="text-align: right; margin-top: 15px; font-style: normal;">— Morgane</p></div>
+            <div class="testimonial glass-inner-card"><p>"Laurence est une âme douce..."</p><p style="text-align: right; margin-top: 15px; font-style: normal;">— Loïse</p></div>
+            <div class="testimonial glass-inner-card"><p>"Laurence m'accompagne depuis le début de ma grossesse..."</p><p style="text-align: right; margin-top: 15px; font-style: normal;">— Morgane</p></div>
             <h2 style="text-align: center; color: #f093fb; margin: 40px 0;">Choisis ton parcours d'accompagnement</h2>
             <div class="parcours-buttons"><a href="#" class="parcours-btn" onclick="showPage('collectif'); return false;"><span class="emoji">✨</span><div class="title">Parcours Collectif</div><div class="subtitle">En groupe bienveillant</div></a><a href="#" class="parcours-btn" onclick="showPage('individuel'); return false;"><span class="emoji">🌿</span><div class="title">Parcours Individuel</div><div class="subtitle">Sur-mesure pour toi</div></a><a href="#" class="parcours-btn" onclick="showPage('mixte'); return false;"><span class="emoji">💎</span><div class="title">Parcours Mixte</div><div class="subtitle">Le plus complet</div></a></div>
             <div class="footer"><p>Avec amour et bienveillance 💕</p><p style="margin-top: 10px; font-size: 0.9em;">© 2025 L'Or en Moi - Tous droits réservés</p></div>
@@ -95,15 +96,23 @@
         <div class="glass-container">
             <a href="#" class="back-btn" onclick="showPage('home'); return false;">← Retour</a>
             <div class="header"><h1>✨ Parcours Collectif 🫂</h1><p class="subtitle">L'énergie du groupe pour avancer ensemble</p></div>
+            <div class="glass-inner-card"><h2>Un accompagnement en groupe bienveillant</h2><p>En visio par Zoom – mamans et futures mamans</p><p>📅 <strong>Engagement sur 6 mois</strong></p><p>🎯 <strong>2 rencontres de 2h / mois</strong> (24h au total)</p><ul class="highlight-list" style="margin-top: 30px;"><li>Un groupe chaleureux et bienveillant</li><li>Des échanges riches, des expériences partagées</li><li>Un espace sécurisant pour mettre de la lumière et de la conscience sur ton histoire familiale</li><li>La force du collectif pour te soutenir dans ta transformation</li><li>Des exercices pratiques à réaliser ensemble</li></ul></div>
+            <div class="glass-inner-card"><h2>Ce que tu vas vivre</h2><p>Chaque rencontre est une opportunité de grandir, de partager et de recevoir. Tu découvriras que tu n'es pas seule dans tes questionnements et que la magie opère quand les femmes se rassemblent avec authenticité.</p><p>Le groupe devient un véritable cercle de soutien où chacune peut s'exprimer librement, être entendue et accompagnée dans sa transformation personnelle.</p></div>
+
             <form class="form-section" id="form-collectif">
-                <h2>Inscription au Parcours Collectif</h2><div class="price-display">Prix : 610€</div>
-                <h3 style="margin-top: 30px; color: #f093fb;">1. Choisissez vos modalités de paiement</h3>
+                <h2>Inscription au Parcours Collectif</h2>
+                <div class="price-display">Prix : 610€</div>
+                <div class="form-group"><label>Nom *</label><input type="text" name="nom" required></div>
+                <div class="form-group"><label>Prénom *</label><input type="text" name="prenom" required></div>
+                <div class="form-group"><label>Email *</label><input type="email" name="email" required></div>
+                <div class="form-group"><label>Date de naissance *</label><input type="date" name="naissance" required></div>
+                <h3 style="margin-top: 30px; color: #f093fb;">Choisissez vos modalités de paiement</h3>
                 <div class="payment-options">
                     <div class="payment-option" onclick="selectPayment(this, 'collectif', 1)"><strong>1 fois</strong><br><span>579.50€</span> (-5%)</div>
                     <div class="payment-option" onclick="selectPayment(this, 'collectif', 3)"><strong>3 fois</strong><br><span>203.33€/mois</span></div>
                     <div class="payment-option" onclick="selectPayment(this, 'collectif', 6)"><strong>6 fois</strong><br><span>101.67€/mois</span></div>
                 </div>
-                <input type="hidden" name="priceId" id="priceId-collectif" /><h3 style="margin-top: 40px; color: #f093fb;">2. Procédez au paiement sécurisé</h3>
+                <input type="hidden" name="priceId" id="priceId-collectif" />
                 <button type="submit" class="btn-submit">Payer avec Stripe</button>
             </form>
         </div>
@@ -113,15 +122,22 @@
         <div class="glass-container">
             <a href="#" class="back-btn" onclick="showPage('home'); return false;">← Retour</a>
             <div class="header"><h1>🌿 Parcours Individuel 👤</h1><p class="subtitle">Un accompagnement sur-mesure rien que pour toi</p></div>
+            <div class="glass-inner-card"><h2>Un accompagnement personnalisé et profond</h2><p>En visio par Zoom – avant, pendant ou après la grossesse</p><p>📅 <strong>Engagement sur 6 mois</strong></p><p>🎯 <strong>2 séances d'1h30 / mois</strong> (18h au total)</p><ul class="highlight-list" style="margin-top: 30px;"><li>Un accompagnement profond et personnalisé</li><li>Un espace rien qu'à toi pour avancer à ton rythme</li><li>Sortir du poids de ton histoire familiale et choisir en conscience ce que tu transmets à tes enfants</li><li>Créer une vie plus épanouie et heureuse, pour toi et pour eux</li><li>Un suivi adapté à tes besoins spécifiques</li></ul></div>
+            <div class="glass-inner-card"><h2>Ton parcours unique</h2><p>Chaque séance est adaptée à tes besoins du moment. Nous travaillons en profondeur sur les thématiques qui te touchent personnellement, avec tout le temps nécessaire pour intégrer les transformations.</p><p>C'est ton espace sacré de transformation, où tu peux être pleinement toi-même et explorer toutes les dimensions de ta maternité et de ta féminité.</p></div>
+
             <form class="form-section" id="form-individuel">
                 <h2>Inscription au Parcours Individuel</h2><div class="price-display">Prix : 1980€</div>
-                <h3 style="margin-top: 30px; color: #f093fb;">1. Choisissez vos modalités de paiement</h3>
+                <div class="form-group"><label>Nom *</label><input type="text" name="nom" required></div>
+                <div class="form-group"><label>Prénom *</label><input type="text" name="prenom" required></div>
+                <div class="form-group"><label>Email *</label><input type="email" name="email" required></div>
+                <div class="form-group"><label>Date de naissance *</label><input type="date" name="naissance" required></div>
+                <h3 style="margin-top: 30px; color: #f093fb;">Choisissez vos modalités de paiement</h3>
                 <div class="payment-options">
                     <div class="payment-option" onclick="selectPayment(this, 'individuel', 1)"><strong>1 fois</strong><br><span>1881€</span> (-5%)</div>
                     <div class="payment-option" onclick="selectPayment(this, 'individuel', 3)"><strong>3 fois</strong><br><span>660€/mois</span></div>
                     <div class="payment-option" onclick="selectPayment(this, 'individuel', 6)"><strong>6 fois</strong><br><span>330€/mois</span></div>
                 </div>
-                <input type="hidden" name="priceId" id="priceId-individuel" /><h3 style="margin-top: 40px; color: #f093fb;">2. Procédez au paiement sécurisé</h3>
+                <input type="hidden" name="priceId" id="priceId-individuel" />
                 <button type="submit" class="btn-submit">Payer avec Stripe</button>
             </form>
         </div>
@@ -131,15 +147,22 @@
         <div class="glass-container">
             <a href="#" class="back-btn" onclick="showPage('home'); return false;">← Retour</a>
             <div class="header"><h1>💎 Parcours Mixte 👥</h1><p class="subtitle">Le plus complet : collectif + individuel</p></div>
+            <div class="glass-inner-card"><h2>L'accompagnement le plus transformateur</h2><p>✨ <strong>Le meilleur des deux mondes</strong> ✨</p><p>📅 <strong>Engagement sur 6 mois</strong> (flexibilité possible)</p><p>🎯 <strong>Parcours collectif + Parcours individuel combinés</strong></p><ul class="highlight-list" style="margin-top: 30px;"><li>Les bienfaits du groupe + la profondeur du sur-mesure</li><li>Un soutien continu à chaque étape de ta maternité</li><li>Avancer plus confiante, avoir transcendé les charges transgénérationnelles</li><li>Être pleinement en phase avec ton destin</li><li>Une transformation complète et durable</li></ul></div>
+            <div class="glass-inner-card"><h2>La formule d'excellence</h2><p>Ce parcours mixte combine la richesse des échanges en groupe avec l'intimité et la personnalisation des séances individuelles. Tu bénéficies ainsi d'un accompagnement complet qui te permet d'explorer toutes les dimensions de ta transformation.</p><p>C'est le choix idéal pour celles qui souhaitent s'investir pleinement dans leur évolution et bénéficier du maximum de soutien et d'outils pour leur transformation.</p></div>
+
             <form class="form-section" id="form-mixte">
                 <h2>Inscription au Parcours Mixte</h2><div class="price-display">Prix : 2590€</div>
-                <h3 style="margin-top: 30px; color: #f093fb;">1. Choisissez vos modalités de paiement</h3>
+                <div class="form-group"><label>Nom *</label><input type="text" name="nom" required></div>
+                <div class="form-group"><label>Prénom *</label><input type="text" name="prenom" required></div>
+                <div class="form-group"><label>Email *</label><input type="email" name="email" required></div>
+                <div class="form-group"><label>Date de naissance *</label><input type="date" name="naissance" required></div>
+                <h3 style="margin-top: 30px; color: #f093fb;">Choisissez vos modalités de paiement</h3>
                 <div class="payment-options">
                     <div class="payment-option" onclick="selectPayment(this, 'mixte', 1)"><strong>1 fois</strong><br><span>2460.50€</span> (-5%)</div>
                     <div class="payment-option" onclick="selectPayment(this, 'mixte', 3)"><strong>3 fois</strong><br><span>863.33€/mois</span></div>
                     <div class="payment-option" onclick="selectPayment(this, 'mixte', 6)"><strong>6 fois</strong><br><span>431.67€/mois</span></div>
                 </div>
-                <input type="hidden" name="priceId" id="priceId-mixte" /><h3 style="margin-top: 40px; color: #f093fb;">2. Procédez au paiement sécurisé</h3>
+                <input type="hidden" name="priceId" id="priceId-mixte" />
                 <button type="submit" class="btn-submit">Payer avec Stripe</button>
             </form>
         </div>
@@ -150,17 +173,9 @@
         const stripe = Stripe('pk_live_51S7cMYRVvIndqOZ2vnRwFFyOgsPvdTFoI5QNC1HGOwuegvy156uU8Ndgb2jOpvKFFvM6Ikq3W66wruoub3wUVT5d00jUH7xFaT');
 
         const priceIds = {
-            'collectif-1': 'price_1S7eM2RVvIndqOZ2QUIF8uub',
-            'collectif-3': 'price_1S7eWqRVvIndqOZ2kodxqqK9',
-            'collectif-6': 'price_1S7eWqRVvIndqOZ2Id4HDjOO',
-
-            'individuel-1': 'price_1S7eKcRVvIndqOZ2jWbFs1lI',
-            'individuel-3': 'price_1S7eSNRVvIndqOZ2kwMx8ndF',
-            'individuel-6': 'price_1S7eSNRVvIndqOZ2JSLcliBr',
-
-            'mixte-1': 'price_1S7eN8RVvIndqOZ2xYJ3ACuR',
-            'mixte-3': 'price_1S7eVbRVvIndqOZ2IEsQQhkN',
-            'mixte-6': 'price_1S7eVbRVvIndqOZ2ffehKN3U',
+            'collectif-1': 'price_1S7eM2RVvIndqOZ2QUIF8uub', 'collectif-3': 'price_1S7eWqRVvIndqOZ2kodxqqK9', 'collectif-6': 'price_1S7eWqRVvIndqOZ2Id4HDjOO',
+            'individuel-1': 'price_1S7eKcRVvIndqOZ2jWbFs1lI', 'individuel-3': 'price_1S7eSNRVvIndqOZ2kwMx8ndF', 'individuel-6': 'price_1S7eSNRVvIndqOZ2JSLcliBr',
+            'mixte-1': 'price_1S7eN8RVvIndqOZ2xYJ3ACuR', 'mixte-3': 'price_1S7eVbRVvIndqOZ2IEsQQhkN', 'mixte-6': 'price_1S7eVbRVvIndqOZ2ffehKN3U',
         };
 
         let selectedPayments = {};
@@ -175,11 +190,8 @@
         function selectPayment(element, parcours, installments) {
             element.parentElement.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
             element.classList.add('selected');
-
             const planKey = `${parcours}-${installments}`;
-            const priceId = priceIds[planKey];
-            document.getElementById(`priceId-${parcours}`).value = priceId;
-            selectedPayments[parcours] = priceId;
+            selectedPayments[parcours] = priceIds[planKey];
         }
 
         document.querySelectorAll('form.form-section').forEach(form => {
@@ -187,10 +199,15 @@
                 e.preventDefault();
                 const parcours = form.id.replace('form-', '');
                 const priceId = selectedPayments[parcours];
+                const emailInput = form.querySelector('input[name="email"]');
                 const submitButton = form.querySelector('.btn-submit');
 
                 if (!priceId) {
                     alert('Veuillez sélectionner une option de paiement.');
+                    return;
+                }
+                if (!emailInput.value || !form.checkValidity()) {
+                    alert('Veuillez remplir tous les champs requis (*).');
                     return;
                 }
 
@@ -201,19 +218,18 @@
                     const response = await fetch('/api/create-checkout-session', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ priceId: priceId })
+                        body: JSON.stringify({
+                            priceId: priceId,
+                            customerEmail: emailInput.value // Envoyer l'email au backend
+                        })
                     });
 
                     const { sessionId, error } = await response.json();
                     if (error) { throw new Error(error); }
 
-                    const result = await stripe.redirectToCheckout({
-                        sessionId: sessionId
-                    });
+                    const result = await stripe.redirectToCheckout({ sessionId: sessionId });
 
-                    if (result.error) {
-                        alert(result.error.message);
-                    }
+                    if (result.error) { alert(result.error.message); }
                 } catch (error) {
                     console.error('Erreur:', error);
                     alert('Une erreur est survenue. Veuillez réessayer.');

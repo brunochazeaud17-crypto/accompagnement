@@ -4,97 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>L'Or en Moi - Accompagnement parents et futurs parents</title>
+    <script src="https://js.stripe.com/v3/"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Avenir Light', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: #2C5B85;
-            background-image: radial-gradient(circle at top left, rgba(102, 126, 234, 0.3), transparent 40%),
-                              radial-gradient(circle at bottom right, rgba(240, 147, 251, 0.3), transparent 40%);
-            min-height: 100vh;
-            color: #f0f0f0;
-            overflow-x: hidden;
-        }
-
-        /* Animation de fond liquide */
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            33% { transform: translateY(-20px) rotate(1deg); }
-            66% { transform: translateY(20px) rotate(-1deg); }
-        }
-
-        @keyframes morphing {
-            0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-        }
-
-        .liquid-bg {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .liquid-shape {
-            position: absolute;
-            animation: float 12s ease-in-out infinite, morphing 12s ease-in-out infinite;
-            backdrop-filter: blur(120px);
-            background: rgba(255, 255, 255, 0.05);
-            transition: transform 0.2s ease-out;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Avenir Light', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #2C5B85; background-image: radial-gradient(circle at top left, rgba(102, 126, 234, 0.3), transparent 40%), radial-gradient(circle at bottom right, rgba(240, 147, 251, 0.3), transparent 40%); min-height: 100vh; color: #f0f0f0; overflow-x: hidden; }
+        @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 33% { transform: translateY(-20px) rotate(1deg); } 66% { transform: translateY(20px) rotate(-1deg); } }
+        @keyframes morphing { 0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; } 50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; } }
+        .liquid-bg { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; overflow: hidden; }
+        .liquid-shape { position: absolute; animation: float 12s ease-in-out infinite, morphing 12s ease-in-out infinite; backdrop-filter: blur(120px); background: rgba(255, 255, 255, 0.05); transition: transform 0.2s ease-out; }
         .shape1 { width: 450px; height: 450px; top: -150px; left: -100px; background: rgba(240, 147, 251, 0.15); }
         .shape2 { width: 400px; height: 400px; bottom: -200px; right: -150px; background: rgba(102, 126, 234, 0.15); animation-delay: -4s; }
         .shape3 { width: 350px; height: 350px; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255, 255, 255, 0.08); animation-delay: -6s; }
-        
-        /* Conteneur principal */
-        .glass-container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 50px 40px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border-radius: 30px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            animation: fadeIn 1s ease-out;
-        }
-        
-        /* Cartes intérieures */
-        .glass-inner-card {
-            margin: 40px 0;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            transition: all 0.3s ease;
-        }
-
-        .glass-inner-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        /* Header & Typographie */
+        .glass-container { max-width: 1200px; margin: 40px auto; padding: 50px 40px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border-radius: 30px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.2); animation: fadeIn 1s ease-out; }
+        .glass-inner-card { margin: 40px 0; padding: 30px; background: rgba(255, 255, 255, 0.05); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.15); transition: all 0.3s ease; }
+        .glass-inner-card:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.1); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
         .header { text-align: center; margin-bottom: 50px; }
         .logo { max-width: 250px; height: auto; margin-bottom: 20px; }
         h1, h2, h3, .parcours-btn .title { font-family: 'Welcome', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
@@ -102,13 +27,9 @@
         .section h2 { font-size: clamp(1.5rem, 1.3rem + 1.5vw, 1.8rem); color: #f7bcfd; margin-bottom: 20px; }
         .subtitle { font-size: 1.25em; color: #d1d1d1; font-weight: 300; }
         .section p { line-height: 1.8; color: #e0e0e0; margin-bottom: 15px; }
-        
-        /* Listes à puces */
         .highlight-list { list-style-type: none; padding: 10px 0; }
         .highlight-list li { padding: 8px 0 8px 30px; position: relative; color: #e0e0e0; line-height: 1.6; }
         .highlight-list li::before { content: '✦'; position: absolute; left: 0; top: 8px; color: #f093fb; font-size: 1.2em; }
-        
-        /* Boutons & Formulaires */
         .parcours-buttons { display: flex; flex-wrap: wrap; gap: 25px; justify-content: center; margin: 50px 0; }
         .parcours-btn { flex: 1; min-width: 250px; padding: 25px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; text-align: center; cursor: pointer; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-decoration: none; color: #f0f0f0; }
         .parcours-btn:hover { transform: translateY(-10px) scale(1.03); background: rgba(255, 255, 255, 0.15); border-color: rgba(240, 147, 251, 0.6); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25); }
@@ -116,27 +37,15 @@
         .parcours-btn .title { font-size: 1.2em; font-weight: 600; color: #f093fb; margin-bottom: 5px; }
         .parcours-btn .subtitle { font-size: 0.9em; color: #d1d1d1; }
         .form-section { background: rgba(0, 0, 0, 0.2); padding: 40px; border-radius: 20px; margin: 40px 0; border: 1px solid rgba(255, 255, 255, 0.1); }
-        .form-group { margin-bottom: 25px; }
-        .form-group label { display: block; margin-bottom: 8px; color: #d1d1d1; font-weight: 500; }
-        .form-group input, .form-group select { width: 100%; padding: 14px 18px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; background: rgba(255, 255, 255, 0.05); font-size: 1em; transition: all 0.3s ease; color: #f0f0f0; font-family: 'Avenir Light', sans-serif; }
-        .form-group input::placeholder { color: #888; }
-        .form-group input:focus, .form-group select:focus { outline: none; border-color: #f093fb; background: rgba(255, 255, 255, 0.1); box-shadow: 0 0 20px rgba(240, 147, 251, 0.2); }
-        .btn-apply, .btn-submit { padding: 14px 25px; color: white; border: 2px solid; border-radius: 12px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; background-color: transparent; text-transform: uppercase; letter-spacing: 1px; }
-        .btn-apply { border-image: linear-gradient(45deg, #f093fb, #f5576c) 1; }
-        .btn-apply:hover { background: linear-gradient(45deg, #f093fb, #f5576c); transform: scale(1.05); box-shadow: 0 10px 20px rgba(240, 147, 251, 0.2); }
-        .btn-submit { width: 100%; font-size: 1.1em; margin-top: 20px; border-image: linear-gradient(45deg, #667eea, #764ba2) 1; }
+        .btn-submit { width: 100%; font-size: 1.1em; margin-top: 20px; border-image: linear-gradient(45deg, #667eea, #764ba2) 1; padding: 14px 25px; color: white; border: 2px solid; border-radius: 12px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; background-color: transparent; text-transform: uppercase; letter-spacing: 1px; }
         .btn-submit:hover { background: linear-gradient(45deg, #667eea, #764ba2); transform: translateY(-3px); box-shadow: 0 15px 30px rgba(118, 75, 162, 0.3); }
         .payment-options { display: flex; gap: 15px; margin: 20px 0; flex-wrap: wrap; }
         .payment-option { flex: 1; min-width: 150px; padding: 15px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 12px; cursor: pointer; text-align: center; transition: all 0.3s ease; }
         .payment-option:hover { border-color: #f093fb; background: rgba(240, 147, 251, 0.1); }
-        .payment-option.selected { border-color: transparent; color: white; background: linear-gradient(45deg, #667eea, #764ba2); box-shadow: 0 5px 15px rgba(118, 75, 162, 0.3); }
+        .payment-option.selected { border-color: #667eea; background: rgba(102, 126, 234, 0.2); }
         .price-display { font-size: 1.5em; color: #f093fb; font-weight: bold; text-align: center; margin: 20px 0; padding: 20px; background: rgba(0, 0, 0, 0.25); border-radius: 15px; }
-        .promo-code { display: flex; gap: 10px; margin: 20px 0; }
-        .promo-code input { flex: 1; }
         .back-btn { display: inline-block; padding: 10px 20px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; text-decoration: none; color: #f093fb; margin-bottom: 30px; transition: all 0.3s ease; }
         .back-btn:hover { background: rgba(255, 255, 255, 0.2); transform: translateX(-5px); }
-        
-        /* Divers */
         .footer { text-align: center; margin-top: 50px; padding: 20px; color: #ccc; }
         .testimonial { position: relative; font-style: italic; }
         .testimonial p { color: #e0e0e0; }
@@ -145,8 +54,6 @@
         .benefit-card h3 { color: #f7bcfd; margin-bottom: 10px; }
         .benefit-card .icon { font-size: 2.5em; margin-bottom: 15px; }
         .benefit-card p { color: #d1d1d1; font-size: 0.95em; }
-
-        /* Responsive */
         @media (max-width: 768px) {
             body { -webkit-overflow-scrolling: touch; }
             .glass-container { margin: 20px; padding: 30px 20px; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
@@ -155,11 +62,8 @@
             .parcours-buttons, .payment-options { flex-direction: column; }
             .form-section { padding: 30px 20px; }
         }
-
-        /* Page visibility */
         .page { display: none; }
         .page.active { display: block; animation: fadeIn 0.5s ease-out forwards; }
-
     </style>
 </head>
 <body>
@@ -186,18 +90,22 @@
             <div class="footer"><p>Avec amour et bienveillance 💕</p><p style="margin-top: 10px; font-size: 0.9em;">© 2025 L'Or en Moi - Tous droits réservés</p></div>
         </div>
     </div>
-    
+
     <div id="collectif" class="page">
         <div class="glass-container">
             <a href="#" class="back-btn" onclick="showPage('home'); return false;">← Retour</a>
             <div class="header"><h1>✨ Parcours Collectif 🫂</h1><p class="subtitle">L'énergie du groupe pour avancer ensemble</p></div>
-            <div class="section glass-inner-card"><h2>Un accompagnement en groupe bienveillant</h2><p>En visio par Zoom – mamans et futures mamans</p><p>📅 <strong>Engagement sur 6 mois</strong></p><p>🎯 <strong>2 rencontres de 2h / mois</strong> (24h au total)</p><ul class="highlight-list" style="margin-top: 30px;"><li>Un groupe chaleureux et bienveillant</li><li>Des échanges riches, des expériences partagées</li><li>Un espace sécurisant pour mettre de la lumière et de la conscience sur ton histoire familiale</li><li>La force du collectif pour te soutenir dans ta transformation</li><li>Des exercices pratiques à réaliser ensemble</li></ul></div>
-            <div class="section glass-inner-card"><h2>Ce que tu vas vivre</h2><p>Chaque rencontre est une opportunité de grandir, de partager et de recevoir...</p></div>
-            <div class="form-section">
-                <h2>Inscription au Parcours Collectif</h2>
-                <div class="price-display" id="price-collectif">Prix : 610€<div style="font-size: 0.7em; color: #ccc; margin-top: 10px;">Possibilité de payer en 1, 3 ou 6 fois</div></div>
-                <form id="form-collectif"><div class="form-group"><label>Nom *</label><input type="text" required></div><div class="form-group"><label>Prénom *</label><input type="text" required></div><div class="form-group"><label>Email *</label><input type="email" required></div><div class="form-group"><label>Date de naissance *</label><input type="date" required></div><div class="form-group"><label>Heure de naissance (optionnel)</label><input type="time"></div><div class="form-group"><label>Lieu de naissance (optionnel)</label><input type="text" placeholder="Ville, Pays"></div><div class="promo-code"><input type="text" id="promo-collectif" placeholder="Code promo"><button type="button" class="btn-apply" onclick="applyPromo('collectif', 610)">Appliquer</button></div><h3 style="margin: 30px 0 20px; color: #f093fb;">Options de paiement</h3><div class="payment-options"><div class="payment-option" onclick="selectPayment(this, 'collectif', 1)"><strong>1 fois</strong><br><span style="color: #4caf50;">-5% de réduction</span><br><span id="payment-1-collectif">579.50€</span></div><div class="payment-option" onclick="selectPayment(this, 'collectif', 3)"><strong>3 fois</strong><br><span id="payment-3-collectif">203.33€/mois</span></div><div class="payment-option" onclick="selectPayment(this, 'collectif', 6)"><strong>6 fois</strong><br><span id="payment-6-collectif">101.67€/mois</span></div></div><button type="submit" class="btn-submit">Procéder au paiement</button></form>
-            </div>
+            <form class="form-section" id="form-collectif">
+                <h2>Inscription au Parcours Collectif</h2><div class="price-display">Prix : 610€</div>
+                <h3 style="margin-top: 30px; color: #f093fb;">1. Choisissez vos modalités de paiement</h3>
+                <div class="payment-options">
+                    <div class="payment-option" onclick="selectPayment(this, 'collectif', 1)"><strong>1 fois</strong><br><span>579.50€</span> (-5%)</div>
+                    <div class="payment-option" onclick="selectPayment(this, 'collectif', 3)"><strong>3 fois</strong><br><span>203.33€/mois</span></div>
+                    <div class="payment-option" onclick="selectPayment(this, 'collectif', 6)"><strong>6 fois</strong><br><span>101.67€/mois</span></div>
+                </div>
+                <input type="hidden" name="priceId" id="priceId-collectif" /><h3 style="margin-top: 40px; color: #f093fb;">2. Procédez au paiement sécurisé</h3>
+                <button type="submit" class="btn-submit">Payer avec Stripe</button>
+            </form>
         </div>
     </div>
 
@@ -205,13 +113,17 @@
         <div class="glass-container">
             <a href="#" class="back-btn" onclick="showPage('home'); return false;">← Retour</a>
             <div class="header"><h1>🌿 Parcours Individuel 👤</h1><p class="subtitle">Un accompagnement sur-mesure rien que pour toi</p></div>
-            <div class="section glass-inner-card"><h2>Un accompagnement personnalisé et profond</h2><p>En visio par Zoom – avant, pendant ou après la grossesse</p><p>📅 <strong>Engagement sur 6 mois</strong></p><p>🎯 <strong>2 séances d'1h30 / mois</strong> (18h au total)</p><ul class="highlight-list" style="margin-top: 30px;"><li>Un accompagnement profond et personnalisé</li><li>...</li></ul></div>
-            <div class="section glass-inner-card"><h2>Ton parcours unique</h2><p>Chaque séance est adaptée à tes besoins du moment...</p></div>
-            <div class="form-section">
-                <h2>Inscription au Parcours Individuel</h2>
-                <div class="price-display" id="price-individuel">Prix : 1980€<div style="font-size: 0.7em; color: #ccc; margin-top: 10px;">Possibilité de payer en 1, 3 ou 6 fois</div></div>
-                <form id="form-individuel"><div class="form-group"><label>Nom *</label><input type="text" required></div><div class="form-group"><label>Prénom *</label><input type="text" required></div><div class="form-group"><label>Email *</label><input type="email" required></div><div class="form-group"><label>Date de naissance *</label><input type="date" required></div><div class="form-group"><label>Heure de naissance (optionnel)</label><input type="time"></div><div class="form-group"><label>Lieu de naissance (optionnel)</label><input type="text" placeholder="Ville, Pays"></div><div class="promo-code"><input type="text" id="promo-individuel" placeholder="Code promo"><button type="button" class="btn-apply" onclick="applyPromo('individuel', 1980)">Appliquer</button></div><h3 style="margin: 30px 0 20px; color: #f093fb;">Options de paiement</h3><div class="payment-options"><div class="payment-option" onclick="selectPayment(this, 'individuel', 1)"><strong>1 fois</strong><br><span style="color: #4caf50;">-5% de réduction</span><br><span id="payment-1-individuel">1881€</span></div><div class="payment-option" onclick="selectPayment(this, 'individuel', 3)"><strong>3 fois</strong><br><span id="payment-3-individuel">660€/mois</span></div><div class="payment-option" onclick="selectPayment(this, 'individuel', 6)"><strong>6 fois</strong><br><span id="payment-6-individuel">330€/mois</span></div></div><button type="submit" class="btn-submit">Procéder au paiement</button></form>
-            </div>
+            <form class="form-section" id="form-individuel">
+                <h2>Inscription au Parcours Individuel</h2><div class="price-display">Prix : 1980€</div>
+                <h3 style="margin-top: 30px; color: #f093fb;">1. Choisissez vos modalités de paiement</h3>
+                <div class="payment-options">
+                    <div class="payment-option" onclick="selectPayment(this, 'individuel', 1)"><strong>1 fois</strong><br><span>1881€</span> (-5%)</div>
+                    <div class="payment-option" onclick="selectPayment(this, 'individuel', 3)"><strong>3 fois</strong><br><span>660€/mois</span></div>
+                    <div class="payment-option" onclick="selectPayment(this, 'individuel', 6)"><strong>6 fois</strong><br><span>330€/mois</span></div>
+                </div>
+                <input type="hidden" name="priceId" id="priceId-individuel" /><h3 style="margin-top: 40px; color: #f093fb;">2. Procédez au paiement sécurisé</h3>
+                <button type="submit" class="btn-submit">Payer avec Stripe</button>
+            </form>
         </div>
     </div>
 
@@ -219,20 +131,38 @@
         <div class="glass-container">
             <a href="#" class="back-btn" onclick="showPage('home'); return false;">← Retour</a>
             <div class="header"><h1>💎 Parcours Mixte 👥</h1><p class="subtitle">Le plus complet : collectif + individuel</p></div>
-            <div class="section glass-inner-card"><h2>L'accompagnement qui révolutionne votre parcours</h2><p>✨ <strong>Le meilleur des deux mondes</strong> ✨</p><p>...</p></div>
-            <div class="section glass-inner-card"><h2>La formule d'excellence</h2><p>Ce parcours mixte combine la richesse des échanges en groupe...</p></div>
-            <div class="form-section">
-                <h2>Inscription au Parcours Mixte</h2>
-                <div class="price-display" id="price-mixte">Prix : 2590€<div style="font-size: 0.7em; color: #ccc; margin-top: 10px;">Possibilité de payer en 1, 3 ou 6 fois</div></div>
-                <form id="form-mixte"><div class="form-group"><label>Nom *</label><input type="text" required></div><div class="form-group"><label>Prénom *</label><input type="text" required></div><div class="form-group"><label>Email *</label><input type="email" required></div><div class="form-group"><label>Date de naissance *</label><input type="date" required></div><div class="form-group"><label>Heure de naissance (optionnel)</label><input type="time"></div><div class="form-group"><label>Lieu de naissance (optionnel)</label><input type="text" placeholder="Ville, Pays"></div><div class="promo-code"><input type="text" id="promo-mixte" placeholder="Code promo"><button type="button" class="btn-apply" onclick="applyPromo('mixte', 2590)">Appliquer</button></div><h3 style="margin: 30px 0 20px; color: #f093fb;">Options de paiement</h3><div class="payment-options"><div class="payment-option" onclick="selectPayment(this, 'mixte', 1)"><strong>1 fois</strong><br><span style="color: #4caf50;">-5% de réduction</span><br><span id="payment-1-mixte">2460.50€</span></div><div class="payment-option" onclick="selectPayment(this, 'mixte', 3)"><strong>3 fois</strong><br><span id="payment-3-mixte">863.33€/mois</span></div><div class="payment-option" onclick="selectPayment(this, 'mixte', 6)"><strong>6 fois</strong><br><span id="payment-6-mixte">431.67€/mois</span></div></div><button type="submit" class="btn-submit">Procéder au paiement</button></form>
-            </div>
+            <form class="form-section" id="form-mixte">
+                <h2>Inscription au Parcours Mixte</h2><div class="price-display">Prix : 2590€</div>
+                <h3 style="margin-top: 30px; color: #f093fb;">1. Choisissez vos modalités de paiement</h3>
+                <div class="payment-options">
+                    <div class="payment-option" onclick="selectPayment(this, 'mixte', 1)"><strong>1 fois</strong><br><span>2460.50€</span> (-5%)</div>
+                    <div class="payment-option" onclick="selectPayment(this, 'mixte', 3)"><strong>3 fois</strong><br><span>863.33€/mois</span></div>
+                    <div class="payment-option" onclick="selectPayment(this, 'mixte', 6)"><strong>6 fois</strong><br><span>431.67€/mois</span></div>
+                </div>
+                <input type="hidden" name="priceId" id="priceId-mixte" /><h3 style="margin-top: 40px; color: #f093fb;">2. Procédez au paiement sécurisé</h3>
+                <button type="submit" class="btn-submit">Payer avec Stripe</button>
+            </form>
         </div>
     </div>
 
     <script>
-        const basePrices = { collectif: 610, individuel: 1980, mixte: 2590 };
-        const promoPrices = { collectif: 427, individuel: 1386, mixte: 1813 }; // 30% discount
-        let currentPrices = {...basePrices};
+        // --- CONFIGURATION AVEC VOS CLÉS "LIVE" ---
+        const stripe = Stripe('pk_live_51S7cMYRVvIndqOZ2vnRwFFyOgsPvdTFoI5QNC1HGOwuegvy156uU8Ndgb2jOpvKFFvM6Ikq3W66wruoub3wUVT5d00jUH7xFaT');
+
+        const priceIds = {
+            'collectif-1': 'price_1S7eM2RVvIndqOZ2QUIF8uub',
+            'collectif-3': 'price_1S7eWqRVvIndqOZ2kodxqqK9',
+            'collectif-6': 'price_1S7eWqRVvIndqOZ2Id4HDjOO',
+
+            'individuel-1': 'price_1S7eKcRVvIndqOZ2jWbFs1lI',
+            'individuel-3': 'price_1S7eSNRVvIndqOZ2kwMx8ndF',
+            'individuel-6': 'price_1S7eSNRVvIndqOZ2JSLcliBr',
+
+            'mixte-1': 'price_1S7eN8RVvIndqOZ2xYJ3ACuR',
+            'mixte-3': 'price_1S7eVbRVvIndqOZ2IEsQQhkN',
+            'mixte-6': 'price_1S7eVbRVvIndqOZ2ffehKN3U',
+        };
+
         let selectedPayments = {};
 
         function showPage(pageId) {
@@ -242,64 +172,54 @@
             window.scrollTo(0, 0);
         }
 
-        function applyPromo(type) {
-            const promoInput = document.getElementById(`promo-${type}`);
-            const priceDisplay = document.getElementById(`price-${type}`);
-            const basePrice = basePrices[type];
-            
-            if (promoInput.value.toUpperCase() === 'MAMENOR') {
-                const newPrice = promoPrices[type];
-                currentPrices[type] = newPrice;
-                priceDisplay.innerHTML = `<span style="text-decoration: line-through; color: #999;">${basePrice}€</span> <span style="color: #4caf50;">${newPrice.toFixed(2)}€</span><div style="font-size: 0.8em; color: #4caf50; margin-top: 10px;">🎉 Code promo appliqué !</div><div style="font-size: 0.7em; color: #ccc; margin-top: 5px;">Possibilité de payer en 1, 3 ou 6 fois</div>`;
-                updatePaymentOptions(type);
-                promoInput.style.borderColor = '#4caf50';
-                promoInput.style.background = 'rgba(76, 175, 80, 0.1)';
-                setTimeout(() => alert('🎉 Félicitations ! Le code promo a été appliqué.'), 100);
-            } else if (promoInput.value) {
-                alert('Code promo invalide');
-                promoInput.style.borderColor = '#f44336';
-            }
-        }
-
-        function updatePaymentOptions(type) {
-            const price = currentPrices[type];
-            document.getElementById(`payment-1-${type}`).textContent = `${(price * 0.95).toFixed(2)}€`;
-            document.getElementById(`payment-3-${type}`).textContent = `${(price / 3).toFixed(2)}€/mois`;
-            document.getElementById(`payment-6-${type}`).textContent = `${(price / 6).toFixed(2)}€/mois`;
-        }
-
-        function selectPayment(element, type, times) {
+        function selectPayment(element, parcours, installments) {
             element.parentElement.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
             element.classList.add('selected');
-            selectedPayments[type] = times;
+
+            const planKey = `${parcours}-${installments}`;
+            const priceId = priceIds[planKey];
+            document.getElementById(`priceId-${parcours}`).value = priceId;
+            selectedPayments[parcours] = priceId;
         }
 
-        document.querySelectorAll('form').forEach(form => {
-            form.addEventListener('submit', function(e) {
+        document.querySelectorAll('form.form-section').forEach(form => {
+            form.addEventListener('submit', async function(e) {
                 e.preventDefault();
-                const type = form.id.replace('form-', '');
-                if (!selectedPayments[type]) {
-                    alert('Veuillez sélectionner une option de paiement');
+                const parcours = form.id.replace('form-', '');
+                const priceId = selectedPayments[parcours];
+                const submitButton = form.querySelector('.btn-submit');
+
+                if (!priceId) {
+                    alert('Veuillez sélectionner une option de paiement.');
                     return;
                 }
-                const formButton = form.querySelector('.btn-submit');
-                formButton.textContent = 'Redirection...';
-                setTimeout(() => {
-                    alert(`Redirection simulée vers le paiement pour le ${type === 'collectif' ? 'Parcours Collectif' : type === 'individuel' ? 'Parcours Individuel' : 'Parcours Mixte'}...\n\nMontant : ${currentPrices[type].toFixed(2)}€\nPaiement en ${selectedPayments[type]} fois`);
-                    formButton.textContent = 'Procéder au paiement';
-                }, 1500);
-            });
-        });
 
-        document.addEventListener('mousemove', (e) => {
-            if (window.innerWidth < 1024) return;
-            const shapes = document.querySelectorAll('.liquid-shape');
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
-            shapes.forEach((shape, index) => {
-                const speedX = (index + 1) * -10;
-                const speedY = (index + 1) * -15;
-                shape.style.transform = `translate(${x * speedX}px, ${y * speedY}px)`;
+                submitButton.textContent = 'Redirection...';
+                submitButton.disabled = true;
+
+                try {
+                    const response = await fetch('/api/create-checkout-session', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ priceId: priceId })
+                    });
+
+                    const { sessionId, error } = await response.json();
+                    if (error) { throw new Error(error); }
+
+                    const result = await stripe.redirectToCheckout({
+                        sessionId: sessionId
+                    });
+
+                    if (result.error) {
+                        alert(result.error.message);
+                    }
+                } catch (error) {
+                    console.error('Erreur:', error);
+                    alert('Une erreur est survenue. Veuillez réessayer.');
+                    submitButton.textContent = 'Payer avec Stripe';
+                    submitButton.disabled = false;
+                }
             });
         });
     </script>

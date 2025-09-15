@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Or en Moi - Confirmation d'inscription</title>
+    <style>
+        /* Copie exacte du CSS de la page principale pour un style cohérent */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Avenir Light', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #2C5B85; background-image: radial-gradient(circle at top left, rgba(102, 126, 234, 0.3), transparent 40%), radial-gradient(circle at bottom right, rgba(240, 147, 251, 0.3), transparent 40%); min-height: 100vh; color: #f0f0f0; overflow-x: hidden; }
+        @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 33% { transform: translateY(-20px) rotate(1deg); } 66% { transform: translateY(20px) rotate(-1deg); } }
+        @keyframes morphing { 0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; } 50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; } }
+        .liquid-bg { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; overflow: hidden; }
+        .liquid-shape { position: absolute; animation: float 12s ease-in-out infinite, morphing 12s ease-in-out infinite; backdrop-filter: blur(120px); background: rgba(255, 255, 255, 0.05); }
+        .shape1 { width: 450px; height: 450px; top: -150px; left: -100px; background: rgba(240, 147, 251, 0.15); }
+        .shape2 { width: 400px; height: 400px; bottom: -200px; right: -150px; background: rgba(102, 126, 234, 0.15); animation-delay: -4s; }
+        .shape3 { width: 350px; height: 350px; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255, 255, 255, 0.08); animation-delay: -6s; }
+        .glass-container { max-width: 900px; margin: 40px auto; padding: 60px 40px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border-radius: 30px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.2); animation: fadeIn 1s ease-out; text-align: center;}
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        h1 { font-family: 'Welcome', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: clamp(2.2rem, 1.8rem + 3vw, 3rem); color: #f093fb; margin-bottom: 25px; font-weight: 700; text-shadow: 0 0 25px rgba(240, 147, 251, 0.5); line-height: 1.2; }
+        p { line-height: 1.8; color: #e0e0e0; font-size: 1.1em; margin-bottom: 30px; }
+        .back-btn { display: inline-block; padding: 12px 25px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; text-decoration: none; color: #f093fb; transition: all 0.3s ease; font-size: 1em; font-weight: 600; }
+        .back-btn:hover { background: rgba(255, 255, 255, 0.2); transform: translateY(-3px); }
+    </style>
+</head>
+<body>
+    <div class="liquid-bg">
+        <div class="liquid-shape shape1"></div>
+        <div class="liquid-shape shape2"></div>
+        <div class="liquid-shape shape3"></div>
+    </div>
+
+    <div class="glass-container">
+        <h1>✨ Félicitations et bienvenue !</h1>
+        <p>
+            Votre inscription a bien été validée. Nous sommes ravis de vous accueillir dans cette nouvelle aventure.
+        </p>
+        <p>
+            Vous allez recevoir un <strong>e-mail de confirmation</strong> d'ici quelques minutes avec tous les détails pratiques pour commencer votre parcours. Pensez à vérifier votre dossier de courriers indésirables (spam).
+        </p>
+        <p>
+            Si vous avez la moindre question, n'hésitez pas à répondre directement à cet e-mail ou à me contacter.
+        </p>
+        <a href="/" class="back-btn">Retour à la page d'accueil</a>
+    </div>
+</body>
+</html>

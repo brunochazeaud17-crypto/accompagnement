@@ -114,6 +114,9 @@
                 </div>
                 <input type="hidden" name="priceId" id="priceId-collectif" />
                 <button type="submit" class="btn-submit">Payer avec Stripe</button>
+                <p style="margin-top:15px; text-align:center; color:#f7bcfd; font-weight:600;">
+                    ✨ N'oublie pas ton code promo <strong>MAMAENOR</strong> pour bénéficier de -30% ✨
+                </p>
             </form>
         </div>
     </div>
@@ -139,6 +142,9 @@
                 </div>
                 <input type="hidden" name="priceId" id="priceId-individuel" />
                 <button type="submit" class="btn-submit">Payer avec Stripe</button>
+                <p style="margin-top:15px; text-align:center; color:#f7bcfd; font-weight:600;">
+                    ✨ N'oublie pas ton code promo <strong>MAMAENOR</strong> pour bénéficier de -30% ✨
+                </p>
             </form>
         </div>
     </div>
@@ -164,6 +170,9 @@
                 </div>
                 <input type="hidden" name="priceId" id="priceId-mixte" />
                 <button type="submit" class="btn-submit">Payer avec Stripe</button>
+                <p style="margin-top:15px; text-align:center; color:#f7bcfd; font-weight:600;">
+                    ✨ N'oublie pas ton code promo <strong>MAMAENOR</strong> pour bénéficier de -30% ✨
+                </p>
             </form>
         </div>
     </div>
@@ -173,9 +182,9 @@
         const stripe = Stripe('pk_live_51S7cMYRVvIndqOZ2vnRwFFyOgsPvdTFoI5QNC1HGOwuegvy156uU8Ndgb2jOpvKFFvM6Ikq3W66wruoub3wUVT5d00jUH7xFaT');
 
         const priceIds = {
-            'collectif-1': 'price_1S7eM2RVvIndqOZ2QUIF8uub', 'collectif-3': 'price_1S7eWqRVvIndqOZ2kodxqqK9', 'collectif-6': 'price_1S7eWqRVvIndqOZ2Id4HDjOO',
-            'individuel-1': 'price_1S7eKcRVvIndqOZ2jWbFs1lI', 'individuel-3': 'price_1S7eSNRVvIndqOZ2kwMx8ndF', 'individuel-6': 'price_1S7eSNRVvIndqOZ2JSLcliBr',
-            'mixte-1': 'price_1S7eN8RVvIndqOZ2xYJ3ACuR', 'mixte-3': 'price_1S7eVbRVvIndqOZ2IEsQQhkN', 'mixte-6': 'price_1S7eVbRVvIndqOZ2ffehKN3U',
+            'collectif-1': 'price_1S7yJlRVvIndqOZ2lUqBrN3E', 'collectif-3': 'price_1S7eWqRVvIndqOZ2kodxqqK9', 'collectif-6': 'price_1S7eWqRVvIndqOZ2Id4HDjOO',
+            'individuel-1': 'price_1S7yL8RVvIndqOZ2Tm63BGHz', 'individuel-3': 'price_1S7eSNRVvIndqOZ2kwMx8ndF', 'individuel-6': 'price_1S7eSNRVvIndqOZ2JSLcliBr',
+            'mixte-1': 'price_1S7yHgRVvIndqOZ2adFU9BI0', 'mixte-3': 'price_1S7eVbRVvIndqOZ2IEsQQhkN', 'mixte-6': 'price_1S7eVbRVvIndqOZ2ffehKN3U',
         };
 
         let selectedPayments = {};
